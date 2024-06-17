@@ -33,12 +33,11 @@ jobs:
         git config --global user.email "shangskr@github.com"
         git config --global user.name "shangskr"
 
-    - name: Remove existing index.html
+    - name: Remove existing index.html if exists
       run: |
-        git rm --cached index.html
-        rm index.html
+        rm -f index.html
 
-    - name: Move new index.html into place
+    - name: Move generated HTML file to index.html
       run: |
         mv new_index.html index.html
 
@@ -50,4 +49,3 @@ jobs:
       run: |
         git commit -m "Update index.html" -a || echo "No changes to commit"
         git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} main
-
