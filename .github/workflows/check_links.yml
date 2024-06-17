@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 6 * * *'  # 每天的6点运行
+    - cron: '0 6 */2 * *'  # 每两天的6点运行
 
 jobs:
   check_links:
