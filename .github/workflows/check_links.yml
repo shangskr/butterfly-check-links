@@ -1,4 +1,4 @@
-name: checklinks
+name: check-links
 
 on:
   push:
