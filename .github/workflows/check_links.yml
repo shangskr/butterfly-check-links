@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 6 * * *'  # 每天的6点运行
 
 jobs:
   check_links:
@@ -26,10 +28,13 @@ jobs:
     - name: Run Python script to check links and generate HTML
       run: python check_links.py
 
-    - name: Commit and push generated HTML file
+    - name: Configure Git
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
+
+    - name: Commit and push generated HTML file
+      run: |
         git add index.html
         git commit -m "Generate index.html"
         git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} main
