@@ -1,0 +1,72 @@
+- class_name: 双黄蛋
+  flink_style: flexcard
+  class_desc: 膜拜大佬~~
+  link_list:
+      - name: 轻笑Chuckle
+        link: https://www.qcqx.cn
+        avatar: https://www.qcqx.cn/head.webp
+        descr: 漫天倾尘,风中轻笑
+        siteshot: https://www.qcqx.cn/qcqx.webp
+      - name: 中弦星空魔法屋
+        link: https://blog.sinzmise.top/
+        avatar: https://blog.sinzmise.top/img/512.png
+        descr: 种下一颗有故事的种子，让它带着魔法和奇迹生根发芽
+        siteshot: https://image.thum.io/get/allowJPG/wait/20/width/600/crop/950/https://blog.sinzmise.top/
+        theme_color: "#e66744"
+      - name: HiPeach
+        link: https://blog.opeach.cn
+        avatar: https://npm.elemecdn.com/opicture@1.0.0/main/avatar.webp
+        descr: 妙不可言
+        siteshot: https://registry.npmmirror.com/opicture/1.1.2/files/blog/siteshot/siteshot.webp
+      - name: 福福不服
+        link: https://ffbf.top
+        avatar: https://ffbf.top/upload/logo3.jpeg
+        descr: 不服就是不服
+        siteshot:
+      - name: 落落のBlog
+        link: https://www.whaleluo.top/
+        avatar: http://q.qlogo.cn/headimg_dl?dst_uin=2734184475&spec=640&img_type=jpg
+        descr: 于无常处知有情,于有情处知众生.
+        siteshot:           
+- class_name: 熟鸡蛋
+  flink_style: volantis
+  class_desc: 这些是我的小伙伴
+  link_list:
+    - name: 小何
+      link: https://hexo.dreamerhe.online/
+      avatar: https://jsd.onmicrosoft.cn/gh/dreamerhe114514/baimgapi@main/image/tx.png
+      descr: 追梦小何，梦必追逐！一个无名小卒的个人博客
+      siteshot: 
+    - name: 安凝雪科技
+      link: https://www.anxkj.top
+      avatar: https://www.anxkj.top/wp-content/uploads/2023/08/1-removebg-preview-1-e1690948213560.png
+      descr: 专注于技术分享，PHP源码、技术学习、建站教程 、实用软件、软件源码…专注于免费提供最新的源码多方面性质资源分享,免费源码交流学习基地。
+      siteshot:
+- class_name: 个人网站
+  flink_style: volantis
+  class_desc: 这些是我的个人网站
+  link_list:
+    - name: 主页
+      link: https://shangskr.top/
+      avatar: https://hexo.shangskr.top/img/favicon.png
+      descr: 一个静态主页
+      siteshot: 
+    - name: cf个人博客
+      link: http://blog.shanskr.top/
+      avatar: https://hexo.shangskr.top/img/favicon.png
+      descr: 一个有后台的个人博客
+      siteshot: https://hexo.shangskr.top/img/cfblog.png      
+- class_name: 特别推荐
+  flink_style: flexcard
+  class_desc: 对我有用的博客及网站
+  link_list:
+    - name: Hexo
+      link: https://hexo.io/
+      avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+      descr: 快速、简单且强大的网站框架
+      siteshot: https://image.thum.io/get/width/400/crop/800/allowJPG/wait/20/noanimate/https://hexo.io/zh-tw/
+    - name: Butterfly
+      link: https://butterfly.js.org/
+      avatar: https://cdn.staticaly.com/gh/SinzMise/MYPictures@master/20230116/more-butterfly-demo-avatar.70domgxf4rs0.webp
+      descr: A Simple and Card UI Design theme for Hexo
+      siteshot: https://image.thum.io/get/width/400/crop/800/allowJPG/wait/20/noanimate/https://butterfly.js.org/
