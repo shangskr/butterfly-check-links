@@ -5,8 +5,8 @@ import concurrent.futures
 # 包含链接信息的YAML文件路径
 yaml_file_path = 'link.yml'
 
-# 列出所有无法访问链接的输出文本文件路径
-output_txt_path = 'inaccessible_links.txt'
+# 列出所有无法访问链接的输出HTML文件路径
+output_html_path = 'index.html'
 
 # 加载YAML数据
 with open(yaml_file_path, 'r', encoding='utf-8') as file:
@@ -15,46 +15,58 @@ with open(yaml_file_path, 'r', encoding='utf-8') as file:
 # 模拟浏览器的User-Agent字符串
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 
-# 字典来存储可访问和无法访问的链接及其原始索引
-accessible_links = {}
-inaccessible_links = {}
+# 列表来存储无法访问的链接
+inaccessible_links = []
 
 # 使用HEAD请求检查链接是否可访问的函数
-def check_link_accessibility(link, index):
+def check_link_accessibility(link):
     headers = {"User-Agent": user_agent}
     try:
         response = requests.head(link, headers=headers, timeout=5)
-        if response.status_code == 200:
-            accessible_links[index] = link
-            print(f"可访问: {link}", flush=True)
-        else:
-            inaccessible_links[index] = link
+        if response.status_code != 200:
+            inaccessible_links.append(link)
     except requests.RequestException:
-        inaccessible_links[index] = link
+        inaccessible_links.append(link)
 
 # 使用ThreadPoolExecutor并发检查多个链接
 with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
     links_to_check = []
-    index = 0
     for section in data:
         if 'link_list' in section:
             for item in section['link_list']:
-                links_to_check.append((index, item['link']))
-                index += 1
+                links_to_check.append(item['link'])
 
-    futures = [executor.submit(check_link_accessibility, link, idx) for idx, link in links_to_check]
+    # 提交所有任务到执行器
+    futures = [executor.submit(check_link_accessibility, link) for link in links_to_check]
+
+    # 等待所有任务完成
     concurrent.futures.wait(futures)
 
-# 将无法访问的链接按原始顺序写入输出文本文件
-with open(output_txt_path, 'w', encoding='utf-8') as file:
-    if inaccessible_links:
-        file.write("无法访问的链接:\n")
-        for idx in sorted(inaccessible_links.keys()):
-            file.write(f"{inaccessible_links[idx]}\n")
-    else:
-        file.write("所有链接均可访问。")
+# 生成HTML内容
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无法访问的链接</title>
+</head>
+<body>
+    <h1>无法访问的链接</h1>
+    <ul>
+"""
+for link in inaccessible_links:
+    html_content += f"<li>{link}</li>\n"
 
-# 打印可访问的链接
-print("可访问的链接:")
-for idx in sorted(accessible_links.keys()):
-    print(accessible_links[idx], flush=True)
+html_content += """
+    </ul>
+</body>
+</html>
+"""
+
+# 将HTML内容写入文件
+with open(output_html_path, 'w', encoding='utf-8') as file:
+    file.write(html_content)
+
+# 打印结果
+print("HTML文件生成完毕:", output_html_path)
