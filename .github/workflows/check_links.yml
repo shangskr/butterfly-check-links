@@ -25,9 +25,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyyaml requests
 
-    - name: Run Python script to check links and generate HTML
-      run: python check_links.py
-
     - name: Configure Git
       run: |
         git config --global user.email "shangskr@github.com"
@@ -37,9 +34,8 @@ jobs:
       run: |
         rm -f index.html
 
-    - name: Move generated HTML file to index.html
-      run: |
-        mv new_index.html index.html
+    - name: Run Python script to check links and generate HTML
+      run: python check_links.py
 
     - name: Add changes to Git
       run: |
@@ -47,5 +43,5 @@ jobs:
 
     - name: Commit and push generated HTML file
       run: |
-        git commit -m "Update index.html" -a || echo "No changes to commit"
+        git commit -m "Generate index.html"
         git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} main
