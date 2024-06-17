@@ -3,7 +3,7 @@
   class_desc: 膜拜大佬~~
   link_list:
       - name: 轻笑Chuckle
-        link: https://wws.qcqx.cn
+        link: https://www.qcqx.cn
         avatar: https://www.qcqx.cn/head.webp
         descr: 漫天倾尘,风中轻笑
         siteshot: https://www.qcqx.cn/qcqx.webp
@@ -52,7 +52,7 @@
       descr: 一个静态主页
       siteshot: 
     - name: cf个人博客
-      link: http://blog.shanskr.top/
+      link: https://blog.shanskr.top/
       avatar: https://hexo.shangskr.top/img/favicon.png
       descr: 一个有后台的个人博客
       siteshot: https://hexo.shangskr.top/img/cfblog.png      
