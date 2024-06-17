@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 0 * * *'  # 这个设置为每天午夜UTC运行
+    - cron: '0 0 * * *'  # 每天午夜UTC运行
 
 jobs:
   check_links:
@@ -30,7 +30,7 @@ jobs:
         python check_links.py
 
     - name: 上传无法访问的链接
-      if: failure()
+      if: always()
       uses: actions/upload-artifact@v2
       with:
         name: inaccessible-links
