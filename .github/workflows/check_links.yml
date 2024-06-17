@@ -27,26 +27,9 @@ jobs:
       run: python check_links.py
 
     - name: Commit and push generated HTML file
-      uses: actions/github-script@v4
-      with:
-        github-token: ${{ secrets.PAT_TOKEN }}
-        script: |
-          const fs = require('fs');
-          const data = fs.readFileSync('index.html', 'utf8');
-          const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-          octokit.repos.createOrUpdateFileContents({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            path: 'index.html',
-            message: 'Generate index.html',
-            content: Buffer.from(data).toString('base64'),
-            committer: {
-              name: 'GitHub Actions',
-              email: 'actions@github.com',
-            },
-            author: {
-              name: 'shangskr',
-              email: 'shangskr@users.noreply.github.com',
-            },
-            branch: 'main'
-          });
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add index.html
+        git commit -m "Generate index.html"
+        git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} main
