@@ -33,8 +33,21 @@ jobs:
         git config --global user.email "shangskr@github.com"
         git config --global user.name "shangskr"
 
-    - name: Commit and push generated HTML file
+    - name: Remove existing index.html
+      run: |
+        git rm --cached index.html
+        rm index.html
+
+    - name: Move new index.html into place
+      run: |
+        mv new_index.html index.html
+
+    - name: Add changes to Git
       run: |
         git add index.html
-        git commit -m "Generate index.html"
+
+    - name: Commit and push generated HTML file
+      run: |
+        git commit -m "Update index.html" -a || echo "No changes to commit"
         git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} main
+
