@@ -27,12 +27,9 @@ jobs:
       run: python check_links.py
 
     - name: Commit and push generated HTML file
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Generate index.html"
+        file_pattern: index.html
       env:
-        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git add index.html
-        git commit -m "Generate index.html"
-        git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
-        git push origin main
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
