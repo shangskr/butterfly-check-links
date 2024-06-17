@@ -27,9 +27,26 @@ jobs:
       run: python check_links.py
 
     - name: Commit and push generated HTML file
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: actions/github-script@v4
       with:
-        commit_message: "Generate index.html"
-        file_pattern: index.html
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        github-token: ${{ secrets.PAT_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const data = fs.readFileSync('index.html', 'utf8');
+          const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+          octokit.repos.createOrUpdateFileContents({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            path: 'index.html',
+            message: 'Generate index.html',
+            content: Buffer.from(data).toString('base64'),
+            committer: {
+              name: 'GitHub Actions',
+              email: 'actions@github.com',
+            },
+            author: {
+              name: 'shangskr',
+              email: 'shangskr@users.noreply.github.com',
+            },
+            branch: 'main'
+          });
