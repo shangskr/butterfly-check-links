@@ -41,7 +41,13 @@ jobs:
       run: |
         git add index.html
 
+    - name: Check if there are changes to commit
+      id: git-check
+      run: |
+        git diff-index --quiet HEAD || echo "Changes detected"
+
     - name: Commit and push generated HTML file
+      if: steps.git-check.outputs.stdout == 'Changes detected'
       run: |
         git commit -m "Generate index.html"
         git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} main
