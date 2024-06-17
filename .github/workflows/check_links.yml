@@ -1,4 +1,4 @@
-name: 检查链接
+name: checklinks
 
 on:
   push:
