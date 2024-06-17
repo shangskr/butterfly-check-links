@@ -25,17 +25,17 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyyaml requests
 
-    - name: Configure Git
-      run: |
-        git config --global user.email "shangskr@github.com"
-        git config --global user.name "shangskr"
-
     - name: Remove existing index.html if exists
       run: |
         rm -f index.html
 
     - name: Run Python script to check links and generate HTML
       run: python check_links.py
+
+    - name: Configure Git
+      run: |
+        git config --global user.email "shangskr@github.com"
+        git config --global user.name "shangskr"
 
     - name: Add changes to Git
       run: |
