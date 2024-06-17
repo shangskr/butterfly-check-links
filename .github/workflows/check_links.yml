@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 6 * * *'  # 每天的6点运行
-  workflow_dispatch:  # 允许手动触发运行
 
 jobs:
   check_links:
