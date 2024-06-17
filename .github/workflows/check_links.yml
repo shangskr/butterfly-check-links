@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 6 * * *'  # 每天的6点运行
 
 jobs:
   check_links:
@@ -25,29 +23,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyyaml requests
 
-    - name: Remove existing index.html if exists
-      run: |
-        rm -f index.html
-
     - name: Run Python script to check links and generate HTML
       run: python check_links.py
 
-    - name: Configure Git
-      run: |
-        git config --global user.email "shangskr@github.com"
-        git config --global user.name "shangskr"
-
-    - name: Add changes to Git
-      run: |
-        git add index.html
-
-    - name: Check if there are changes to commit
-      id: git-check
-      run: |
-        git diff-index --quiet HEAD || echo "Changes detected"
-
     - name: Commit and push generated HTML file
-      if: steps.git-check.outputs.stdout == 'Changes detected'
       run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add index.html
         git commit -m "Generate index.html"
         git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} main
