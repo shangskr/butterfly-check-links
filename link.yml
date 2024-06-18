@@ -49,7 +49,7 @@
     - name: 主页
       link: https://shangskr.top/
       avatar: https://hexo.shangskr.top/img/favicon.png
-      descr: 一个静态主页
+      descr: 静态主页
       siteshot: 
     - name: cf个人博客
       link: https://blog.shanskr.top/
